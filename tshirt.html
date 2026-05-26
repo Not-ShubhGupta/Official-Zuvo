@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUVO | B2B Apparel Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { background-color: #ffffff; color: #111111; line-height: 1.6; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 30px; }
+
+        header {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            background-color: rgba(255,255,255,0.95);
+            border-bottom: 1px solid #eeeeee;
+            z-index: 1000;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
+        .logo-brand { display: flex; align-items: center; gap: 12px; }
+        .brand-icon { height: 90px; width: auto; object-fit: contain; }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; }
+        nav a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-left: 30px;
+            transition: color 0.2s ease;
+        }
+        nav a:hover { color: #000000; }
+
+        .hero {
+            background-image: url('banner yes.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 0 60px 0;
+        }
+        .hero-content { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ffffff;
+            border: 4px solid #ffffff;
+            padding: 18px 36px;
+            display: inline-block;
+            background-color: rgba(0,0,0,0.25);
+            backdrop-filter: blur(4px);
+        }
+        .hero p {
+            font-size: 17px;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            font-weight: 500;
+        }
+        .b2b-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #111111;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .catalog-section { padding: 80px 0 50px 0; border-bottom: 1px solid #eeeeee; }
+        .section-header { margin-bottom: 35px; }
+        .section-header h2 { font-size: 22px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #111111; }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 28px; 
+        }
+        .product-card { background: #ffffff; }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999999;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            border: 1px solid #eaeaea;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .product-info { display: flex; flex-direction: column; }
+        .product-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+        .product-name { font-size: 15px; font-weight: 600; color: #111111; line-height: 1.3; }
+        .product-sku { font-size: 11.5px; color: #888888; font-family: monospace; }
+        .product-desc { 
+            font-size: 13.5px; 
+            color: #666666; 
+            line-height: 1.45; 
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .contact-box { max-width: 600px; margin: 0 auto; }
+        .contact-box h2 { font-size: 26px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 18px; }
+        .contact-box p { color: #555555; margin-bottom: 35px; font-size: 15px; }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 38px;
+            background-color: #111111;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background-color 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { background-color: #333333; }
+
+        .b2b-contact-layout { padding: 90px 0; background-color: #ffffff; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+
+        .subbrand-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #888888;
+            margin-bottom: 10px;
+        }
+        .subbrand-tag::before,
+        .subbrand-tag::after {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 1px;
+            background: #bbbbbb;
+        }
+        .subbrand-note {
+            font-size: 13px;
+            color: #888888;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+        .subbrand-note strong { color: #111111; font-style: normal; font-weight: 700; }
+
+        .contact-details h2 { font-size: 26px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .contact-details p { color: #666666; margin-bottom: 35px; font-size: 15px; max-width: 450px; }
+        .info-block { margin-bottom: 28px; }
+        .info-block h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #888888; margin-bottom: 5px; }
+        .info-block p { font-size: 15.5px; color: #111111; margin-bottom: 0; }
+
+        .social-heading {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888888;
+            font-weight: 700;
+            margin-bottom: 14px;
+            margin-top: 32px;
+        }
+        .social-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 16px;
+            border: 1.5px solid #dddddd;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #111111;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+        .social-btn:hover { border-color: #111111; background: #111111; color: #fff; }
+        .social-btn svg { width: 16px; height: 16px; fill: #111111; flex-shrink: 0; transition: fill 0.2s ease; }
+
+        .contact-form { display: flex; flex-direction: column; gap: 22px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 7px; color: #111111; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cccccc;
+            background-color: #ffffff;
+            font-size: 14px;
+            color: #111111;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #111111; }
+        .form-group textarea { resize: vertical; min-height: 110px; }
+
+        footer { background-color: #111111; color: #ffffff; padding: 35px 0; font-size: 12px; letter-spacing: 1px; }
+        .footer-container { display: flex; justify-content: space-between; align-items: center; }
+        .footer-tagline { color: #888888; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo-brand">
+                <img src="brand.jpg" alt="ZUVO Logo" class="brand-icon">
+            </div>
+            <nav>
+                <a class="social-btn ij" href="trends.html" target="_blank" rel="noopener">
+                            Trends
+                        </a>
+                <a href="#tshirts">T-Shirts</a>
+                 <a href="index.html">Home</a>
+                <a href="index.html#hoodies">Hoodies</a>
+                <a href="index.html#pants">Pants</a>
+                <a href="#order">B2B Ordering</a>
+                <a href="#contact">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="b2b-badge">Wholesale & Distribution</span>
+            <h1>Wear Your Confidence</h1>
+            <p>Premium Bulk Apparel Engineered for Essentials</p>
+        </div>
+    </section>
+
+    <section id="tshirts" class="catalog-section">
+        <div class="container">
+            <div class="section-header"><h2>Premium Oversized T-Shirts</h2></div>
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="tshirt 1.png" alt="Classic Heavyweight Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Gojo Panel Oversized Tee</span>
+                            <span class="product-sku">TS-001</span>
+                        </div>
+                        <p class="product-desc">240 GSM combed cotton. Preshrunk boxy fit with tight ribbed collar.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="tshirt 2.jpeg" alt="Luxury Pima Slim Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Midnight Panther Tee</span>
+                            <span class="product-sku">TS-002</span>
+                        </div>
+                        <p class="product-desc">180 GSM Peruvian Pima cotton with satin wash. Tailored profile.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="tshirt 3.jpeg" alt="Oversized Drop-Shoulder Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Gojo Panel Oversized Tee</span>
+                            <span class="product-sku">TS-003</span>
+                        </div>
+                        <p class="product-desc">260 GSM interlock knit. Streetwear relaxed silhouette.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="ex1.jpeg" alt="Heavyweight Boxy Fit">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Crimson Panther Tee</span>
+                            <span class="product-sku">TS-004</span>
+                        </div>
+                        <p class="product-desc">280 GSM premium cotton. Perfect for dyeing & printing.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="green.jpeg" alt="Urban Drop Shoulder Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">"Green" House Uniform</span>
+                            <span class="product-sku">TS-005</span>
+                        </div>
+                        <p class="product-desc">300 GSM heavyweight cotton. Extended drop-shoulder for streetwear silhouette.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="black frony.jpeg" alt="Acid Wash Vintage Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Midnight Panther Tee Front</span>
+                            <span class="product-sku">TS-006</span>
+                        </div>
+                        <p class="product-desc">220 GSM ring-spun cotton. Enzyme washed for premium vintage feel.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="blueidk.jpeg" alt="Graphic Boxy Essentials Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">"Blue" School House Uniform</span>
+                            <span class="product-sku">TS-007</span>
+                        </div>
+                        <p class="product-desc">250 GSM cotton-polyester blend. Structured boxy cut, ideal for large-scale prints.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="crimzone front.jpeg" alt="Relaxed Longline Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Crimson Panther Tee Front</span>
+                            <span class="product-sku">TS-008</span>
+                        </div>
+                        <p class="product-desc">270 GSM slub cotton. Extended hem with curved tail, relaxed oversized fit.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="white back.jpeg" alt="Essential Pigment Dyed Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">White Panther Tee</span>
+                            <span class="product-sku">TS-009</span>
+                        </div>
+                        <p class="product-desc">230 GSM garment-dyed cotton. Worn-in look with rich, fade-resistant pigments.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="blue.jpeg" alt="Streetwear Panel Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Light Blue T-Shirt</span>
+                            <span class="product-sku">TS-010</span>
+                        </div>
+                        <p class="product-desc">260 GSM double-layered collar. Cut-and-sew panel construction for contrast detailing.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="litleone.jpeg" alt="Raw Edge Hem Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">"Little one" Tee White</span>
+                            <span class="product-sku">TS-011</span>
+                        </div>
+                        <p class="product-desc">290 GSM open-end yarn. Unfinished hem detail for deconstructed aesthetic.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="white front.jpeg" alt="Washed Heavyweight Boxy Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">White Panther Tee Front</span>
+                            <span class="product-sku">TS-012</span>
+                        </div>
+                        <p class="product-desc">320 GSM stone-washed cotton. Ultra-thick boxy silhouette for premium bulk orders.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="blacky.jpeg" alt="Vintage Mineral Wash Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Black T-Shirt on Mannequin</span>
+                            <span class="product-sku">TS-013</span>
+                        </div>
+                        <p class="product-desc">240 GSM mineral-washed heavy jersey. Custom premium look with rich vintage texture.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="whity.jpeg" alt="Retro Street Silhouette Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">White T-Shirt on Model</span>
+                            <span class="product-sku">TS-014</span>
+                        </div>
+                        <p class="product-desc">260 GSM custom combed cotton. High-ribbed crew neckline tailored for streetwear brands.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="jrsey.jpeg" alt="Premium Carbon Black Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Premium Carbon Black Polo Tee</span>
+                            <span class="product-sku">TS-015</span>
+                        </div>
+                        <p class="product-desc">280 GSM carbon-brushed luxury cotton. Incredible softness combined with structure.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="red.jpeg" alt="Industrial Blank Core Tee">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">"Red" School Uniform</span>
+                            <span class="product-sku">TS-016</span>
+                        </div>
+                        <p class="product-desc">340 GSM ultra heavyweight custom knit fabric. The ultimate premium boxy streetwear profile.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="hoodies" class="catalog-section">
+        <div class="container">
+            <div class="section-header"></div>
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="yellow.jpeg" alt="French Terry Pullover">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">"Yellow" School Uniform</span>
+                            <span class="product-sku">HD-401</span>
+                        </div>
+                        <p class="product-desc">450 GSM loopback cotton. Clean seamless hood.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="ex4.jpeg" alt="Brushed Fleece Zip Hood">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Little One School Polo</span>
+                            <span class="product-sku">HD-402</span>
+                        </div>
+                        <p class="product-desc">Premium fleece with matte hardware.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="ex5.jpeg" alt="Signature Oversized Hoodie">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Shadow Rebel Oversized Tee</span>
+                            <span class="product-sku">HD-403</span>
+                        </div>
+                        <p class="product-desc">500 GSM custom fleece. Vintage silhouette.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="ex6.jpeg" alt="Cropped Hoodie">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Mini Panther Pocket Tee</span>
+                            <span class="product-sku">HD-404</span>
+                        </div>
+                        <p class="product-desc">Heavyweight with ribbed hem.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="pants" class="catalog-section">
+        <div class="container">
+            <div class="section-header"></div>
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="e1.jpeg" alt="Heavy Fleece Sweatpants">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Sage Green Essential Crewneck</span>
+                            <span class="product-sku">PT-701</span>
+                        </div>
+                        <p class="product-desc">450 GSM fleece. Minimal branding.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="h3.jpeg" alt="Relaxed Twill Chino">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Classic White Oversized Hoodie</span>
+                            <span class="product-sku">PT-702</span>
+                        </div>
+                        <p class="product-desc">Durable cotton twill for workwear.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="e7.jpeg" alt="Tailored Cargo Pant">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Crimson Red Heavyweight Crewneck</span>
+                            <span class="product-sku">PT-703</span>
+                        </div>
+                        <p class="product-desc">Water-resistant canvas.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="ex2.jpeg" alt="Jogger Pants">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Pro Performance Long Sleeve Jersey</span>
+                            <span class="product-sku">PT-704</span>
+                        </div>
+                        <p class="product-desc">Tapered fit with ribbed cuffs.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="order" class="contact-section">
+        <div class="container">
+            <div class="contact-box">
+                <h2>Bulk Digital Ordering</h2>
+                <p>Access our real-time wholesale catalog, tier pricing, and custom production platform.</p>
+                <a href="#contact" class="btn-primary">Inquire For Access</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="b2b-contact-layout">
+        <div class="container">
+            <div class="contact-grid">
+
+                <div class="contact-details">
+                    <div class="subbrand-tag">AllTees Enterprises</div>
+                    <p class="subbrand-note">
+                        <strong>ZUVO</strong> is the dedicated B2B sub-brand of
+                        <strong>AllTees Enterprises</strong>.
+                    </p>
+
+                    <h2>Corporate Inquiries</h2>
+                    <p>Contract manufacturing, private label, and high-volume wholesale. Visit <a href="https://zuvo.odoo.com/" target="_blank">zuvo.odoo.com</a></p>
+
+                    <div class="info-block">
+                        <h4>Headquarters</h4>
+                        <p><strong>ALLTEES ENTERPRISES.</strong></p>
+                        <p>2/55 Swarn Jayanti Vihar Sector-2 EWS Koyla Nagar</p>
+                        <p>Kanpur, Uttar Pradesh, India 208011</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>General Communications</h4>
+                        <p>officialzuvo@gmail.com</p>
+                        <p>+91 7897766637</p>
+                    </div>
+
+                    <p class="social-heading">Connect With Us</p>
+                    <div class="social-links">
+                        <a class="social-btn wa" href="https://wa.me/917897766637" target="_blank" rel="noopener">
+                            WhatsApp
+                        </a>
+                        <a class="social-btn ig" href="https://instagram.com/officialzuvo" target="_blank" rel="noopener">
+                            Instagram
+                        </a>
+                        <a class="social-btn yt" href="https://youtube.com/@officialzuvo" target="_blank" rel="noopener">
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="corporate-email">Corporate Email</label>
+                            <input type="email" id="corporate-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" id="company-name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-type">Primary Requirement</label>
+                        <select id="inquiry-type" required>
+                            <option value="" disabled selected hidden>Select...</option>
+                            <option value="wholesale">Wholesale Distribution</option>
+                            <option value="private-label">Private Label / Custom</option>
+                            <option value="sampling">Sample Request</option>
+                            <option value="other">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" placeholder="Volume, variants, customization, timeline..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Request</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div>&copy; ZUVO Corporate Apparel — An AllTees Enterprises Brand.</div>
+            <div class="footer-tagline">Wear Your Confidence</div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated title per your instructions -->
+    <title>brand.jpg | Lookbook & Editorial Trends</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    
+    <style>
+        /* ==========================================================================
+           Structural Variable Defs & Core Reset Matrix
+           ========================================================================== */
+        :root {
+            --luxury-mono-black: #000000;
+            --luxury-mono-dark: #111111;
+            --luxury-mono-mid: #666666;
+            --luxury-mono-light: #f5f5f5;
+            --luxury-mono-white: #ffffff;
+            --system-error-red: #c22d2d;
+            --transition-editorial: cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-duration: 0.6s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--luxury-mono-white);
+            color: var(--luxury-mono-black);
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           Luxury Minimal Navigation Bar Components
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+            z-index: 999;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--luxury-mono-black);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            color: var(--luxury-mono-mid);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 6px 0;
+        }
+
+        .nav-links a:hover, 
+        .nav-links a.active {
+            color: var(--luxury-mono-black);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--luxury-mono-black);
+            transition: width 0.4s var(--transition-editorial);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-admin-login {
+            background: none;
+            border: 1px solid var(--luxury-mono-black);
+            padding: 10px 24px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            cursor: pointer;
+            transition: background-color 0.4s var(--transition-editorial), color 0.4s var(--transition-editorial);
+        }
+
+        .btn-admin-login:hover {
+            background-color: var(--luxury-mono-black);
+            color: var(--luxury-mono-white);
+        }
+
+        /* ==========================================================================
+           Editorial Hero Section Components
+           ========================================================================== */
+        .hero-section {
+            position: relative;
+            height: 65vh;
+            min-height: 500px;
+            background-color: #1a1a1a;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("fashion trends bg.png");
+            background-size: cover;
+            background-position: center 30%;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            color: var(--luxury-mono-white);
+            z-index: 2;
+            animation: fadeInHero 1.2s var(--transition-editorial) forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            display: block;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .hero-title {
+            font-size: 52px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            line-height: 1.15;
+            margin-bottom: 25px;
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            font-weight: 300;
+            max-width: 500px;
+            line-height: 1.7;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* ==========================================================================
+           Lookbook Core Display Feed Components
+           ========================================================================== */
+        .editorial-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 90px 40px;
+        }
+
+        .section-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--luxury-mono-black);
+            padding-bottom: 20px;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .section-counter {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--luxury-mono-mid);
+        }
+
+        .trends-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px 40px;
+        }
+
+        .trend-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: cardEntrance 0.8s var(--transition-editorial) forwards;
+        }
+
+        .card-inner-frame {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .image-canvas {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background-color: var(--luxury-mono-light);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .image-canvas img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-duration) var(--transition-editorial);
+        }
+
+        .card-inner-frame:hover .image-canvas img {
+            transform: scale(1.05);
+        }
+
+        .btn-card-purge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--luxury-mono-white);
+            color: var(--luxury-mono-black);
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            opacity: 0;
+            z-index: 5;
+            transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-inner-frame:hover .btn-card-purge {
+            opacity: 1;
+        }
+
+        .btn-card-purge:hover {
+            background-color: var(--system-error-red);
+            color: var(--luxury-mono-white);
+        }
+
+        .post-metadata {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--luxury-mono-mid);
+            margin-bottom: 10px;
+        }
+
+        .post-title {
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            color: var(--luxury-mono-black);
+            line-height: 1.4;
+        }
+
+        .post-description {
+            font-size: 13px;
+            color: var(--luxury-mono-mid);
+            line-height: 1.65;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        /* ==========================================================================
+           State Empty View Components
+           ========================================================================== */
+        .empty-matrix-view {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 120px 0;
+            border: 1px dashed rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty-view-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .empty-view-subtitle {
+            font-size: 12px;
+            color: var(--luxury-mono-mid);
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           System Admin Authentication Modal Interface
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s var(--transition-editorial);
+        }
+
+        .modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .auth-card {
+            background-color: var(--luxury-mono-white);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.5s var(--transition-editorial);
+        }
+
+        .modal-overlay.is-active .auth-card {
+            transform: scale(1);
+        }
+
+        .modal-close-trigger {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 1;
+            color: var(--luxury-mono-black);
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-close-trigger:hover {
+            opacity: 0.5;
+        }
+
+        .auth-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .auth-subtitle {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--luxury-mono-mid);
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-input-wrapper label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            color: var(--luxury-mono-black);
+        }
+
+        .form-input-wrapper input,
+        .form-input-wrapper textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(0,0,0,0.15);
+            background-color: var(--luxury-mono-white);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input-wrapper input:focus,
+        .form-input-wrapper textarea:focus {
+            border-color: var(--luxury-mono-black);
+        }
+
+        .form-input-wrapper textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .auth-error-msg {
+            font-size: 11px;
+            color: var(--system-error-red);
+            letter-spacing: 0.5px;
+            display: none;
+            text-align: center;
+        }
+
+        .btn-submit-action {
+            background-color: var(--luxury-mono-black);
+            color: var(--luxury-mono-white);
+            border: none;
+            padding: 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit-action:hover {
+            background-color: #222222;
+        }
+
+        /* ==========================================================================
+           Protected Control Infrastructure Dashboard Section
+           ========================================================================== */
+        .admin-dashboard-drawer {
+            background-color: var(--luxury-mono-light);
+            border-top: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding: 80px 0;
+            display: none;
+        }
+
+        .admin-dashboard-drawer.is-visible {
+            display: block;
+            animation: panelSlideUp 0.6s var(--transition-editorial);
+        }
+
+        .dashboard-inner-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .dashboard-header-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 25px;
+            margin-bottom: 45px;
+        }
+
+        .dashboard-title {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .dashboard-subtitle {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--luxury-mono-mid);
+            margin-top: 4px;
+        }
+
+        .btn-abort-session {
+            background: none;
+            border: 1px solid var(--system-error-red);
+            color: var(--system-error-red);
+            padding: 10px 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-abort-session:hover {
+            background-color: var(--system-error-red);
+            color: var(--luxury-mono-white);
+        }
+
+        .panel-section-heading {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--luxury-mono-black);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .dashboard-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        .upload-control-zone {
+            width: 100%;
+        }
+
+        .media-drop-target {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border: 2px dashed rgba(0,0,0,0.15);
+            background-color: var(--luxury-mono-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .media-drop-target:hover {
+            border-color: var(--luxury-mono-black);
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .drop-zone-prompt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .drop-icon {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: var(--luxury-mono-mid);
+        }
+
+        .drop-text {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .drop-subtext {
+            font-size: 9px;
+            color: var(--luxury-mono-mid);
+            letter-spacing: 0.5px;
+        }
+
+        .upload-preview-output {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .fields-control-zone {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .space-top {
+            margin-top: auto;
+        }
+
+        /* ==========================================================================
+           Luxury Editorial Footer Components
+           ========================================================================== */
+        .editorial-footer {
+            border-top: 1px solid rgba(0,0,0,0.08);
+            padding: 45px 0;
+            margin-top: 120px;
+            background-color: var(--luxury-mono-white);
+        }
+
+        .footer-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+
+        .footer-copyright {
+            font-size: 10px;
+            color: var(--luxury-mono-mid);
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           Animation Matrix Definitions
+           ========================================================================== */
+        @keyframes fadeInHero {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardEntrance {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes panelSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Adaptive Sizing Viewports (Desktop-First Cascade) */
+        @media (max-width: 1200px) {
+            .trends-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .hero-title { font-size: 44px; }
+        }
+
+        @media (max-width: 768px) {
+            .trends-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .dashboard-form-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 32px; }
+            .footer-container { flex-direction: column; gap: 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Verbatim Reference Marker to Asset: brand_3.jpg -->
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">ZUVO</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html">Products</a>
+                <a href="trends.html" class="active">Trends</a>
+            </nav>
+            <button class="btn-admin-login" id="loginBtn">Admin Access</button>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">Maison de Couture</span>
+            <h1 class="hero-title">Volume Editorial<br>Trends & Lookbook</h1>
+            <p class="hero-tagline">Architectural silhouettes and avant-garde utility concepts for the modern metropolis.</p>
+        </div>
+    </section>
+
+    <main class="editorial-container">
+        <div class="section-header-block">
+            <h2 class="section-title">Current Campaigns</h2>
+            <p class="section-counter" id="trendCounter">00 // Collections Listed</p>
+        </div>
+        
+        <div class="trends-grid" id="trendsGrid"></div>
+    </main>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="auth-card">
+            <div class="modal-close-trigger" id="closeLoginModal">&times;</div>
+            <h3 class="auth-title">System Authentication</h3>
+            <p class="auth-subtitle">Restricted Administrative Gateway</p>
+            <form id="loginForm" class="auth-form">
+                <div class="form-input-wrapper">
+                    <label>Operator Signature</label>
+                    <input type="text" id="username" autocomplete="username" placeholder="Username" required>
+                </div>
+                <div class="form-input-wrapper">
+                    <label>Access Key</label>
+                    <input type="password" id="password" autocomplete="current-password" placeholder="••••••••••••" required>
+                </div>
+                <div id="authErrorMessage" class="auth-error-msg">Invalid structural access credentials.</div>
+                <button type="submit" class="btn-submit-action">Authorize Access</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="admin-dashboard-drawer" id="adminDashboard">
+        <div class="dashboard-inner-container">
+            <div class="dashboard-header-block">
+                <div>
+                    <h2 class="dashboard-title">Control Infrastructure Dashboard</h2>
+                    <p class="dashboard-subtitle">Authenticated Session Active</p>
+                </div>
+                <button class="btn-abort-session" id="logoutBtn">Revoke Session</button>
+            </div>
+
+            <form id="campaignPublishForm" class="dashboard-form">
+                <h3 class="panel-section-heading">Manifest New Lookbook Asset</h3>
+                <div class="dashboard-form-grid">
+                    <div class="upload-control-zone">
+                        <label class="media-drop-target" id="dropTarget">
+                            <input type="file" id="mediaUploadInput" accept="image/*" required style="display: none;">
+                            <div class="drop-zone-prompt" id="dropZonePrompt">
+                                <span class="drop-icon">⊕</span>
+                                <span class="drop-text">Stage Campaign Image Asset</span>
+                                <span class="drop-subtext">Supports PNG, JPEG, WEBP formats</span>
+                            </div>
+                            <img id="imagePreviewRender" class="upload-preview-output" alt="Staged Campaign Preview">
+                        </label>
+                    </div>
+
+                    <div class="fields-control-zone">
+                        <div class="form-input-wrapper">
+                            <label for="campaignTitle">Editorial Title</label>
+                            <input type="text" id="campaignTitle" placeholder="e.g., 'CYBERPUNK ANTI-UTILITY' MOVEMENT" required>
+                        </div>
+                        <div class="form-input-wrapper">
+                            <label for="campaignDescription">Narrative Manifest / Description</label>
+                            <textarea id="campaignDescription" placeholder="Provide deep contextual details concerning structural textile engineering..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit-action space-top">Publish To Lookbook Stream</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="editorial-footer">
+        <div class="footer-container">
+            <span class="footer-brand">ZUVO MAISON</span>
+            <span class="footer-copyright">&copy; 2026 ZUVO. Engineered globally. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Core Storage Identity Layer Definitions
+            const STORAGE_KEY = 'zuvo_editorial_posts';
+            const AUTH_STATE_KEY = 'zuvo_auth_token';
+            
+            // Updated credentials per your parameters
+            const ADMIN_CREDENTIALS = { user: 'ceozuvo', pass: 'zuvoisthebestyes' };
+
+            // DOM Component Matrix Selections
+            const loginBtn = document.getElementById('loginBtn');
+            const loginModal = document.getElementById('loginModal');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const loginForm = document.getElementById('loginForm');
+            const authErrorMessage = document.getElementById('authErrorMessage');
+            const adminDashboard = document.getElementById('adminDashboard');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            const trendsGrid = document.getElementById('trendsGrid');
+            const trendCounter = document.getElementById('trendCounter');
+            
+            const campaignPublishForm = document.getElementById('campaignPublishForm');
+            const mediaUploadInput = document.getElementById('mediaUploadInput');
+            const dropTarget = document.getElementById('dropTarget');
+            const dropZonePrompt = document.getElementById('dropZonePrompt');
+            const imagePreviewRender = document.getElementById('imagePreviewRender');
+
+            // Runtime Volatile Tracking Cache
+            let activeBase64String = null;
+
+            /* ==========================================================================
+               Authentication Management Layer Engine
+               ========================================================================== */
+            
+            const evaluateSessionState = () => {
+                const tokenValue = localStorage.getItem(AUTH_STATE_KEY);
+                if (tokenValue === 'authenticated') {
+                    adminDashboard.classList.add('is-visible');
+                    loginBtn.textContent = 'Control Panel';
+                } else {
+                    adminDashboard.classList.remove('is-visible');
+                    loginBtn.textContent = 'Admin Access';
+                }
+                renderEditorialFeed();
+            };
+
+            const toggleAuthenticationModal = (displayState) => {
+                if (displayState) {
+                    loginModal.classList.add('is-active');
+                    authErrorMessage.style.display = 'none';
+                } else {
+                    loginModal.classList.remove('is-active');
+                    loginForm.reset();
+                }
+            };
+
+            loginBtn.addEventListener('click', () => {
+                const isAuth = localStorage.getItem(AUTH_STATE_KEY) === 'authenticated';
+                if (isAuth) {
+                    adminDashboard.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    toggleAuthenticationModal(true);
+                }
+            });
+
+            closeLoginModal.addEventListener('click', () => toggleAuthenticationModal(false));
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) toggleAuthenticationModal(false);
+            });
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userInput = document.getElementById('username').value.trim();
+                const passInput = document.getElementById('password').value;
+
+                if (userInput === ADMIN_CREDENTIALS.user && passInput === ADMIN_CREDENTIALS.pass) {
+                    localStorage.setItem(AUTH_STATE_KEY, 'authenticated');
+                    toggleAuthenticationModal(false);
+                    evaluateSessionState();
+                    setTimeout(() => {
+                        adminDashboard.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                } else {
+                    authErrorMessage.style.display = 'block';
+                }
+            });
+
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem(AUTH_STATE_KEY);
+                evaluateSessionState();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            /* ==========================================================================
+               Media Interlock File Pipeline (Image Optimization Handling)
+               ========================================================================== */
+
+            const compileMediaFileState = (file) => {
+                if (!file || !file.type.startsWith('image/')) return;
+
+                const filePipelineReader = new FileReader();
+                filePipelineReader.onload = (event) => {
+                    activeBase64String = event.target.result;
+                    imagePreviewRender.src = activeBase64String;
+                    imagePreviewRender.style.display = 'block';
+                    dropZonePrompt.style.opacity = '0';
+                };
+                filePipelineReader.readAsDataURL(file);
+            };
+
+            mediaUploadInput.addEventListener('change', (e) => {
+                compileMediaFileState(e.target.files[0]);
+            });
+
+            dropTarget.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropTarget.style.borderColor = 'var(--luxury-mono-black)';
+            });
+
+            dropTarget.addEventListener('dragleave', () => {
+                dropTarget.style.borderColor = 'rgba(0,0,0,0.15)';
+            });
+
+            dropTarget.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropTarget.style.borderColor = 'rgba(0,0,0,0.15)';
+                if (e.dataTransfer.files.length > 0) {
+                    mediaUploadInput.files = e.dataTransfer.files;
+                    compileMediaFileState(e.dataTransfer.files[0]);
+                }
+            });
+
+            /* ==========================================================================
+               Database/State Mutations & Core Data Processing
+               ========================================================================== */
+
+            const extractSavedCampaigns = () => {
+                const storedStructure = localStorage.getItem(STORAGE_KEY);
+                return storedStructure ? JSON.parse(storedStructure) : [];
+            };
+
+            const commitCampaignState = (campaignArray) => {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(campaignArray));
+            };
+
+            campaignPublishForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const titleValue = document.getElementById('campaignTitle').value.trim();
+                const descValue = document.getElementById('campaignDescription').value.trim();
+
+                if (!activeBase64String) return;
+
+                const currentCampaigns = extractSavedCampaigns();
+                
+                const newCampaignItem = {
+                    id: 'campaign_' + Date.now(),
+                    title: titleValue,
+                    description: descValue,
+                    image: activeBase64String,
+                    dateStamp: new Date().toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })
+                };
+
+                currentCampaigns.unshift(newCampaignItem);
+                commitCampaignState(currentCampaigns);
+                
+                campaignPublishForm.reset();
+                imagePreviewRender.style.display = 'none';
+                dropZonePrompt.style.opacity = '1';
+                activeBase64String = null;
+
+                renderEditorialFeed();
+            });
+
+            window.purgeCampaignElement = (targetId) => {
+                if (!confirm('Confirm definitive purging of targeted Lookbook Asset?')) return;
+                
+                let existingCollection = extractSavedCampaigns();
+                existingCollection = existingCollection.filter(item => item.id !== targetId);
+                commitCampaignState(existingCollection);
+                renderEditorialFeed();
+            };
+
+            /* ==========================================================================
+               UI Mutation Presentation Layer
+               ========================================================================== */
+
+            function renderEditorialFeed() {
+                const currentDataSet = extractSavedCampaigns();
+                const isAuthenticated = localStorage.getItem(AUTH_STATE_KEY) === 'authenticated';
+                
+                const normalizedCount = String(currentDataSet.length).padStart(2, '0');
+                trendCounter.textContent = `${normalizedCount} // Collections Listed`;
+
+                trendsGrid.innerHTML = '';
+
+                if (currentDataSet.length === 0) {
+                    trendsGrid.innerHTML = `
+                        <div class="empty-matrix-view">
+                            <h4 class="empty-view-title">No Active Campaigns Manifested</h4>
+                            <p class="empty-view-subtitle">The editorial sequence directory is currently vacant.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                currentDataSet.forEach((post, index) => {
+                    const cardDOMNode = document.createElement('article');
+                    cardDOMNode.className = 'trend-card';
+                    cardDOMNode.style.animationDelay = `${index * 0.1}s`;
+
+                    cardDOMNode.innerHTML = `
+                        <div class="card-inner-frame">
+                            <div class="image-canvas">
+                                <img src="${post.image}" alt="${post.title}" loading="lazy">
+                                ${
+                                    isAuthenticated 
+                                    ? `<button class="btn-card-purge" onclick="purgeCampaignElement('${post.id}')" title="Purge Asset">✕</button>` 
+                                    : ''
+                                }
+                            </div>
+                            <div class="post-metadata">${post.dateStamp}</div>
+                            <h3 class="post-title">${post.title}</h3>
+                            <p class="post-description">${post.description}</p>
+                        </div>
+                    `;
+                    trendsGrid.appendChild(cardDOMNode);
+                });
+            }
+
+            evaluateSessionState();
+        });
+    </script>
+</body>
+</html>

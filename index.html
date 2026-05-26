@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZUVO | B2B Apparel Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body { background-color: #ffffff; color: #111111; line-height: 1.6; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+        header {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            background-color: rgba(255,255,255,0.95);
+            border-bottom: 1px solid #eeeeee;
+            z-index: 1000;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 105px; }
+        .logo-brand { display: flex; align-items: center; gap: 12px; }
+        .brand-icon { height: 105px; width: auto; object-fit: contain; }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; }
+        nav a {
+            text-decoration: none;
+            color: #555555;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-left: 35px;
+            transition: color 0.2s ease;
+        }
+        nav a:hover { color: #000000; }
+
+        .hero {
+            background-image: url('fashion trends bg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 0 60px 0;
+        }
+        .hero-content { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ffffff;
+            border: 4px solid #ffffff;
+            padding: 20px 40px;
+            display: inline-block;
+            background-color: rgba(0,0,0,0.2);
+            backdrop-filter: blur(4px);
+        }
+        .hero p {
+            font-size: 18px;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            font-weight: 500;
+        }
+        .b2b-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #111111;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .catalog-section { padding: 100px 0 60px 0; border-bottom: 1px solid #eeeeee; }
+        .section-header { margin-bottom: 40px; }
+        .section-header h2 { font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #111111; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 40px; }
+        .product-card { background: #ffffff; }
+
+        /* Product image container — same fixed aspect ratio as before */
+        /* Product Image Hover Effect - Front / Back */
+.product-image {
+    width: 100%;
+    aspect-ratio: 9/16;           /* Tall & Slim look */
+    background-color: #f4f4f4;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #eaeaea;
+    margin-bottom: 20px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.product-image .front {
+    opacity: 1;
+    z-index: 2;
+}
+
+.product-image .back {
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Hover Effect */
+.product-image.hover-flip:hover .front {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.product-image.hover-flip:hover .back {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+        .product-info { display: flex; flex-direction: column; }
+        .product-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+        .product-name { font-size: 16px; font-weight: 600; color: #111111; }
+        .product-sku { font-size: 12px; color: #888888; font-family: monospace; }
+        .product-desc { font-size: 14px; color: #666666; line-height: 1.5; }
+
+        .contact-section {
+            padding: 100px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .contact-box { max-width: 600px; margin: 0 auto; }
+        .contact-box h2 { font-size: 28px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        .contact-box p { color: #555555; margin-bottom: 40px; font-size: 15px; }
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: #111111;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background-color 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { background-color: #333333; }
+
+        .b2b-contact-layout { padding: 100px 0; background-color: #ffffff; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+        .subbrand-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #888888;
+            margin-bottom: 10px;
+        }
+        .subbrand-tag::before,
+        .subbrand-tag::after {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 1px;
+            background: #bbbbbb;
+        }
+        .subbrand-note {
+            font-size: 13px;
+            color: #888888;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+        .subbrand-note strong { color: #111111; font-style: normal; font-weight: 700; }
+
+        .contact-details h2 { font-size: 28px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .contact-details p { color: #666666; margin-bottom: 40px; font-size: 15px; max-width: 450px; }
+        .info-block { margin-bottom: 30px; }
+        .info-block h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #888888; margin-bottom: 5px; }
+        .info-block p { font-size: 16px; color: #111111; margin-bottom: 0; }
+
+        .social-heading {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888888;
+            font-weight: 700;
+            margin-bottom: 14px;
+            margin-top: 36px;
+        }
+        .social-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: 1.5px solid #dddddd;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #111111;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+        .social-btn:hover { border-color: #111111; background: #111111; color: #fff; }
+        .social-btn:hover svg { fill: #fff; }
+        .social-btn svg { width: 16px; height: 16px; fill: #111111; flex-shrink: 0; transition: fill 0.2s ease; }
+        .social-btn.wa:hover { border-color: #25D366; background: #25D366; color: #fff; }
+        .social-btn.ig:hover { border-color: #C13584; background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+        .social-btn.yt:hover { border-color: #FF0000; background: #FF0000; color: #fff; }
+        .social-btn.wa:hover svg, .social-btn.ig:hover svg, .social-btn.yt:hover svg { fill: #fff; }
+
+        .contact-form { display: flex; flex-direction: column; gap: 24px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 8px; color: #111111; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cccccc;
+            background-color: #ffffff;
+            font-size: 14px;
+            color: #111111;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #111111; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        footer { background-color: #111111; color: #ffffff; padding: 40px 0; font-size: 12px; letter-spacing: 1px; }
+        .footer-container { display: flex; justify-content: space-between; align-items: center; }
+        .footer-tagline { color: #888888; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo-brand">
+                <img src="brand.jpg" alt="ZUVO Logo" class="brand-icon">
+            </div>
+            <nav>
+                <a class="social-btn ij" href="trends.html" target="_blank" rel="noopener">
+                            Trends
+                        </a>
+                <a href="tshirt.html">T-Shirts</a>
+                <a href="#hoodies">Hoodies</a>
+                <a href="#pants">Pants</a>
+                <a href="#order">B2B Ordering</a>
+                <a href="#contact">Contact Us</a>
+                
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <span class="b2b-badge">Wholesale & Distribution</span>
+            <h1>Wear Your Confidence</h1>
+            <p>Premium Bulk Apparel Engineered for Essentials</p>
+        </div>
+    </section>
+
+   <!-- T-SHIRTS -->
+<section id="tshirts" class="catalog-section">
+    <div class="container">
+        <div class="section-header"><h2>Premium Oversized T-Shirts</h2></div>
+        <div class="product-grid">
+
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image hover-flip">
+                    <img src="tshirt 1.png" alt="Front View" class="front">
+                    <img src="tshirt 1 back.jpeg" alt="Back View" class="back">   <!-- Add your back image here -->
+                </div>
+                <div class="product-info">
+                    <div class="product-meta">
+                        <span class="product-name">Gojo Panel Oversized Tee</span>
+                        <span class="product-sku">SKU: TS-001</span>
+                    </div>
+                    <p class="product-desc">240 GSM combed cotton. Premium oversized fit with anime graphic print.</p>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image hover-flip">
+                    <img src="tshirt 2.jpeg" alt="Front View" class="front">
+                    <img src="tshirt 2 back.jpeg" alt="Back View" class="back">   <!-- Add your back image here -->
+                </div>
+                <div class="product-info">
+                    <div class="product-meta">
+                        <span class="product-name">Midnight Panther Tee</span>
+                        <span class="product-sku">SKU: TS-002</span>
+                    </div>
+                    <p class="product-desc">Heavyweight black tee with bold panther graphic on back.</p>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image hover-flip">
+                    <img src="tshirt 3.jpeg" alt="Front View" class="front">
+                    <img src="tshirt 1.png" alt="Back View" class="back">   <!-- Add your back image here -->
+                </div>
+                <div class="product-info">
+                    <div class="product-meta">
+                        <span class="product-name">Gojo Portrait Splash Tee</span>
+                        <span class="product-sku">SKU: TS-003</span>
+                    </div>
+                    <p class="product-desc">Streetwear style with premium anime chest print.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- HOODIES -->
+    <section id="hoodies" class="catalog-section">
+        <div class="container">
+            <div class="section-header"><h2>Heavyweight Hoodies</h2></div>
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="h1.jpeg" alt="French Terry Pullover">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Regular Hoodie</span>
+                            <span class="product-sku">SKU: HD-401</span>
+                        </div>
+                        <p class="product-desc">450 GSM unbrushed loopback cotton. Double-lined seamless hood without drawcords for a sleek, high-end look.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="h2.jpeg" alt="Brushed Fleece Zip Hood">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Brushed Fleece Hood</span>
+                            <span class="product-sku">SKU: HD-402</span>
+                        </div>
+                        <p class="product-desc">Premium cotton-poly blend fleece. Features matte custom hardware, split kangaroo pockets, and reinforced ribbing.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="h3.jpeg" alt="Signature Oversized Hoodie">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Signature Oversized Hoodie</span>
+                            <span class="product-sku">SKU: HD-403</span>
+                        </div>
+                        <p class="product-desc">Massive 500 GSM custom milled fleece. Broad shoulders, cropped body length, and tight cuffs for the perfect vintage silhouette.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PANTS -->
+    <section id="pants" class="catalog-section">
+        <div class="container">
+            <div class="section-header"><h2>Minimalist Pants</h2></div>
+            <div class="product-grid">
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="p1.jpeg" alt="Heavy Fleece Sweatpants">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Heavy Fleece Sweatpants</span>
+                            <span class="product-sku">SKU: PT-701</span>
+                        </div>
+                        <p class="product-desc">Matches our 450 GSM fleece line. Side-slit pockets, elastic waistband, and hidden interior drawstrings for minimal exterior branding.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="p2.jpeg" alt="Relaxed Twill Chino">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">Relaxed Fit 2-Way Lower</span>
+                            <span class="product-sku">SKU: PT-702</span>
+                        </div>
+                        <p class="product-desc">Durable 100% cotton drill twill. Straight-leg cut with clean welt back pockets, optimized for uniform and workwear clients.</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="p3.jpeg" alt="Tailored Cargo Pant">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-meta">
+                            <span class="product-name">lenin Lower</span>
+                            <span class="product-sku">PT-703</span>
+                        </div>
+                        <p class="product-desc">Water-resistant technical cotton-nylon canvas. Streamlined geometric side pockets that sit flush against the leg profile.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="order" class="contact-section">
+        <div class="container">
+            <div class="contact-box">
+                <h2>Bulk Digital Ordering</h2>
+                <p>Access our real-time wholesale catalog, tier pricing schedules, and automated custom production workflows through our secure client platform.</p>
+                <a href="#contact" class="btn-primary">Inquire For Access</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="b2b-contact-layout">
+        <div class="container">
+            <div class="contact-grid">
+
+                <div class="contact-details">
+                    <div class="subbrand-tag">AllTees Enterprises</div>
+                    <p class="subbrand-note">
+                        <strong>ZUVO</strong> is the dedicated B2B sub-brand of
+                        <strong>AllTees Enterprises</strong> — supplying premium
+                        blank apparel to wholesale buyers, private labels, and
+                        distribution partners.
+                    </p>
+
+                    <h2>Corporate Inquiries</h2>
+                    <p>Connect with our corporate supply team regarding contract milling, private label manufacturing, or high-volume wholesale access accounts. For more information visit the online store <a href="https://zuvo.odoo.com/" target="_blank">zuvo.odoo.com</a></p>
+
+                    <div class="info-block">
+                        <h4>Headquarters</h4>
+                        <p><strong>ALLTEES ENTERPRISES.</strong></p>
+                        <p>2/55 Swarn Jayanti Vihar Sector-2 EWS Koyla Nagar </p>
+                        <p>Kanpur Uttar Pradesh India</p>
+                        <p>208011</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>General Communications</h4>
+                        <p>officialzuvo@gmail.com</p>
+                        <p>+91 7897766637</p>
+                    </div>
+                    <div class="info-block">
+                        <h4>Operations Hours</h4>
+                        <p>Monday – Saturday: 10:00 – 19:00 IST</p>
+                    </div>
+
+                    <p class="social-heading">Connect With Us</p>
+                    <div class="social-links">
+                        <a class="social-btn wa" href="https://wa.me/917897766637" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp
+                        </a>
+                        <a class="social-btn ig" href="https://instagram.com/officialzuvo" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            Instagram
+                        </a>
+                        <a class="social-btn yt" href="https://youtube.com/@officialzuvo" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" required autocomplete="given-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" required autocomplete="family-name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="corporate-email">Corporate Email</label>
+                            <input type="email" id="corporate-email" required autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="company-name">Company Name / Entity</label>
+                            <input type="text" id="company-name" required autocomplete="organization">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-type">Primary Requirement</label>
+                        <select id="inquiry-type" required>
+                            <option value="" disabled selected hidden>Select corporate profile...</option>
+                            <option value="wholesale">Wholesale Order Distribution</option>
+                            <option value="private-label">Private Label / Custom Milling</option>
+                            <option value="sampling">Production Sample Request</option>
+                            <option value="other">General Corporate Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Project Parameters & Timeline Details</label>
+                        <textarea id="message" placeholder="Provide details regarding expected volume variants, customization specifications, or timeline targets..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Corporate Request</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div>&copy; ZUVO Corporate Apparel &mdash; An AllTees Enterprises Brand. All Rights Reserved.</div>
+            <div class="footer-tagline">Wear Your Confidence</div>
+        </div>
+    </footer>
+
+</body>
+</html>
